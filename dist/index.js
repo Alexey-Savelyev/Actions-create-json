@@ -2891,13 +2891,14 @@ async function main()
     {
         let file = core.getInput('file', {required: true});
 
-        let value = core.getInput('value', {required: true}).split("|");
+        let newValues = core.getInput('value', {required: true}).split("|");
         let field = value[0];
+        let value = newValues[1];
 
-        console.log(`value: ${value}`);
         console.log(`field: ${field}`);
-        
-        value = JSON.parse(value[1]);
+        console.log(`value: ${value}`);
+
+        value = JSON.parse(value);
 
         let data = fs.readFileSync(file, 'utf8');
 
