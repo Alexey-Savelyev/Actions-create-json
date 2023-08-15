@@ -2891,7 +2891,7 @@ async function main()
     {
         let file = core.getInput('file', {required: true});
 
-        let value = core.getInput('value', {required: true}).split(":");
+        let value = core.getInput('value', {required: true}).split("|");
         let field = value[0];
         value = JSON.parse(value[1]);
 
