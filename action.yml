@@ -1,0 +1,16 @@
+name: 'Actions-upsert-json'
+description: 'This GitHub Action helps edit a JSON file'
+author: 'Alexey Savelyev'
+inputs:
+    file:
+        required: true
+        description: "file name to edit (e.g. 'settings.json', 'path/settings.json')"
+    field:
+        required: true
+        description: "JSON key"
+    value:
+        required: true
+        description: "JSON value string"
+runs:
+    using: 'node16'
+    main: 'dist/index.js'
