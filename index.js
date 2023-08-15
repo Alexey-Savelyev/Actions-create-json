@@ -11,10 +11,11 @@ async function main()
 
         let value = core.getInput('value', {required: true}).split("|");
         let field = value[0];
-        value = JSON.parse(value[1]);
 
         console.log(`value: ${value}`);
         console.log(`field: ${field}`);
+        
+        value = JSON.parse(value[1]);
 
         let data = fs.readFileSync(file, 'utf8');
 
