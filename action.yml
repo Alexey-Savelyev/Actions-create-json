@@ -5,12 +5,9 @@ inputs:
     file:
         required: true
         description: "file name to edit (e.g. 'settings.json', 'path/settings.json')"
-    field:
-        required: true
-        description: "JSON key"
     value:
         required: true
-        description: "JSON value string"
+        description: "JSON string"
 runs:
     using: 'node16'
     main: 'dist/index.js'
