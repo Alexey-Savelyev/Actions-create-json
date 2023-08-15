@@ -1,13 +1,16 @@
-name: 'Actions-upsert-json'
-description: 'This GitHub Action helps edit a JSON file'
+name: 'Actions-create-json'
+description: 'This GitHub Action helps to create a JSON file'
 author: 'Alexey Savelyev'
 inputs:
     file:
         required: true
-        description: "file name to edit (e.g. 'settings.json', 'path/settings.json')"
-    value:
+        description: "The name of the file to be written (e.g. 'settings.json')"
+    json:
+        description: "The JSON string that can be a secret of the github repo or a string of a JSON (e.g. '{ 'key1': 'value1' }')"
         required: true
-        description: "JSON string"
+    dir:
+        description: "Optional subfolder directory to save the json file (e.g. src/)"
+        required: false
 runs:
     using: 'node16'
     main: 'dist/index.js'

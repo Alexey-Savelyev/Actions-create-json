@@ -1,35 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 355:
-/***/ ((module) => {
-
-function write(obj, field, value)
-{
-    const root = obj;
-
-    const fieldParts = field.split(".");
-
-    fieldParts.forEach((fieldPart, index) =>
-    {
-        if (index === fieldParts.length - 1)
-        {
-            obj[fieldPart] = value;
-        }
-        else
-        {
-            obj[fieldPart] = obj[fieldPart] || {}
-            obj = obj[fieldPart];
-        }
-    });
-
-    return root;
-}
-
-module.exports = { write }
-
-/***/ }),
-
 /***/ 140:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -2882,47 +2853,51 @@ var __webpack_exports__ = {};
 (() => {
 const core = __nccwpck_require__(722);
 const fs = __nccwpck_require__(147);
+const path = __nccwpck_require__(17);
 
-const writer = __nccwpck_require__(355);
+const fileName = core.getInput('name');
+const jsonString = core.getInput('json');
+const dir = core.getInput('dir');
 
-async function main()
+const fullPath = path.join(process.env.GITHUB_WORKSPACE, dir || "", fileName);
+
+let fileContent = JSON.stringify(jsonString);
+
+fileContent = JSON.parse(fileContent)
+
+try 
 {
-    try
+    core.info('Creating json file...')
+
+    fs.writeFile(fullPath, fileContent, function (error) 
     {
-        let file = core.getInput('file', {required: true});
+        if (error)
+        {
+            core.setFailed(error.message);
+            throw error
+        }
 
-        let newValues = core.getInput('value', {required: true}).split("|");
-        let field = newValues[0];
-        let value = newValues[1];
+        core.info('JSON file created.')
 
-        console.log(`field: ${field}`);
-        console.log(`value: ${value}`);
+        fs.readFile(fullPath, null, handleFile)
 
-        value = JSON.parse(value);
+        function handleFile(err, data)
+        {
+            if (err) {
+                core.setFailed(error.message)
+                throw err
+            }
 
-        let data = fs.readFileSync(file, 'utf8');
+            core.info('JSON checked.')
 
-        let obj = JSON.parse(data);
-        
-        obj = writer.write(obj, field, value);
-        
-        data = JSON.stringify(obj, null, 2);
-
-        fs.writeFileSync(file, data, 'utf8');
-    }
-    catch (error)
-    {
-        core.setFailed(error.message);
-    }
-}
-
-main()
-    .then(() => process.exit(0))
-    .catch(e =>
-    {
-        console.error(e);
-        process.exit(1);
+            core.setOutput("successfully", `Successfully created json on ${fullPath} directory with ${fileContent} data`);
+        }
     });
+} 
+catch (err)
+{
+    core.setFailed(err.message);
+}
 })();
 
 module.exports = __webpack_exports__;
