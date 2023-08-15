@@ -2892,7 +2892,7 @@ async function main()
         let file = core.getInput('file', {required: true});
 
         let newValues = core.getInput('value', {required: true}).split("|");
-        let field = value[0];
+        let field = newValues[0];
         let value = newValues[1];
 
         console.log(`field: ${field}`);
