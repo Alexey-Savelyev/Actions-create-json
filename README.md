@@ -8,7 +8,7 @@ This GitHub Action helps to create a JSON file
 Add this step in your workflow file
 ```yaml
     -   name: Create JSON
-    uses: Alexey-Savelyev/Actions-create-json@v1.0.0
+        uses: Alexey-Savelyev/Actions-create-json@v1.0.0
         with:
             name: "credentials.json"
             json: ${{ secrets.MY_JSON }}
@@ -19,7 +19,7 @@ Or just declare a string of a json on the property `json` like:
 
 ```yaml
     -   name: Create JSON
-    uses: Alexey-Savelyev/Actions-create-json@v1.0.0
+        uses: Alexey-Savelyev/Actions-create-json@v1.0.0
         with:
             name: "new-json-file.json"
             json: '{"name":"jsdaniell", "password":"mypass"}'
