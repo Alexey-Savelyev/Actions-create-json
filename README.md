@@ -28,7 +28,7 @@ Or just declare a string of a json on the property `json` like:
 
 ### Input Variables
 
-- `file`: The name of the file to be written (e.g. 'settings.json')
+- `name`: The name of the file to be written (e.g. 'settings.json')
 - `json`: The JSON string that can be a secret of the github repo or a string of a JSON (e.g. '{ 'key1': 'value1' }')
 - `dir`: Optional subfolder directory to save the json file (e.g. src/)
 
