@@ -2,7 +2,7 @@ name: 'Actions-create-json'
 description: 'This GitHub Action helps to create a JSON file'
 author: 'Alexey Savelyev'
 inputs:
-    file:
+    name:
         required: true
         description: "The name of the file to be written (e.g. 'settings.json')"
     json:
